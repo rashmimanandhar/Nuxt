@@ -19,12 +19,37 @@ export default {
       title: 'Event'
     }
   },
-  asyncData({ $axios }) {
-    return $axios.get('http://localhost:3000/events').then(response => {
+  // asyncData({ $axios, error }) {
+  //   //promises and then api call using axios
+  //   return $axios
+  //     .get('http://localhost:3000/events')
+  //     .then(response => {
+  //       return {
+  //         events: response.data
+  //       }
+  //     })
+  //     .catch(e => {
+  //       error({
+  //         statusCode: 503,
+  //         message:
+  //           'Unable to fetch events at this time. API may be down. Check again'
+  //       })
+  //     })
+  // },
+
+  async asyncData({ $axios, error }) {
+    try {
+      const { data } = await $axios.get('http://localhost:3000/events')
       return {
-        events: response.data
+        events: data
       }
-    })
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message:
+          'Unable to fetch events at this time. API may be down. Check again'
+      })
+    }
   },
   components: {
     EventCard
