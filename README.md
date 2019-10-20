@@ -1,4 +1,4 @@
-# portfolio
+# Event CRUD opeation using Nuxt js
 
 > My primo Nuxt.js project
 
